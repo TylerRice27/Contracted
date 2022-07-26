@@ -37,5 +37,26 @@ namespace Contracted.Controllers
 
 
         }
+
+        [HttpPost]
+        // [Authorize]
+
+        public ActionResult<Company> Create([FromBody] Company company)
+        {
+
+            try
+            {
+                Company newCompany = _cs.Create(company);
+                return Created($"/api/companies/{newCompany.Id}", newCompany);
+
+            }
+            catch (Exception e)
+            {
+
+                return BadRequest(e.Message);
+            }
+
+        }
+
     }
 }

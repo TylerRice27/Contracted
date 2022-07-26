@@ -18,5 +18,11 @@ namespace Contracted.Services
         {
             return _repo.Get();
         }
+
+        internal Company Create(Company company)
+        {
+            Company newCompany = _repo.Create(company);
+            return newCompany;
+        }
     }
 }

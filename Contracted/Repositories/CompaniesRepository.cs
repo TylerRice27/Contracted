@@ -21,5 +21,18 @@ namespace Contracted.Repositories
             string sql = "SELECT * FROM companies";
             return _db.Query<Company>(sql).ToList();
         }
+
+        internal Company Create(Company company)
+        {
+            string sql = @"
+        INSERT INTO companies
+        (name)
+        VALUES
+        (@Name);
+        SELECT LAST_INSERT_ID();";
+
+            company.Id = _db.ExecuteScalar<int>(sql, company);
+            return company;
+        }
     }
 }
