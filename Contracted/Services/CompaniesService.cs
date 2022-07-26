@@ -24,5 +24,23 @@ namespace Contracted.Services
             Company newCompany = _repo.Create(company);
             return newCompany;
         }
+
+        internal Company Get(int id)
+        {
+            Company foundCompany = _repo.Get(id);
+            if (foundCompany == null)
+            {
+                throw new System.Exception("Invaild Id");
+            }
+            return foundCompany;
+
+
+        }
+
+        internal void Delete(int id)
+        {
+            Company foundCompany = Get(id);
+            _repo.Delete(id);
+        }
     }
 }

@@ -34,5 +34,17 @@ namespace Contracted.Repositories
             company.Id = _db.ExecuteScalar<int>(sql, company);
             return company;
         }
+
+        internal Company Get(int id)
+        {
+            string sql = "SELECT * FROM companies WHERE id =@id";
+            return _db.QueryFirstOrDefault<Company>(sql, new { id });
+        }
+
+        internal void Delete(int id)
+        {
+            string sql = "DELETE FROM companies WHERE id = @id LIMIT 1";
+            _db.Execute(sql, new { id });
+        }
     }
 }

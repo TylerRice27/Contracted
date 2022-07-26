@@ -38,6 +38,24 @@ namespace Contracted.Controllers
 
         }
 
+        [HttpGet("{id}")]
+
+        public ActionResult<Company> Get(int id)
+        {
+
+            try
+            {
+                Company company = _cs.Get(id);
+                return Ok(company);
+            }
+            catch (Exception e)
+            {
+
+                return BadRequest(e.Message);
+            }
+
+        }
+
         [HttpPost]
         // [Authorize]
 
@@ -49,6 +67,24 @@ namespace Contracted.Controllers
                 Company newCompany = _cs.Create(company);
                 return Created($"/api/companies/{newCompany.Id}", newCompany);
 
+            }
+            catch (Exception e)
+            {
+
+                return BadRequest(e.Message);
+            }
+
+        }
+
+        [HttpDelete("{id}")]
+        // [Authorize] Grab brear token later
+        public ActionResult<Company> Delete(int id)
+        {
+
+            try
+            {
+                _cs.Delete(id);
+                return Ok("Deleted Company");
             }
             catch (Exception e)
             {
