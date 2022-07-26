@@ -1,6 +1,6 @@
 namespace Contracted.Models
 {
-    public class Companies
+    public class Company
     {
 
         public int Id { get; set; }
@@ -9,7 +9,7 @@ namespace Contracted.Models
 
     }
 
-    public class CompanyContractorViewModel : Companies
+    public class CompanyContractorViewModel : Company
     {
 
         public int JobId { get; set; }
