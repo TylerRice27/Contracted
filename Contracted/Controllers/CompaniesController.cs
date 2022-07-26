@@ -76,6 +76,26 @@ namespace Contracted.Controllers
 
         }
 
+        [HttpPut("{id}")]
+        // [Authorize]
+
+        public ActionResult<Company> Edit([FromBody] Company company, int id)
+        {
+            try
+            {
+                company.Id = id;
+                Company editCompany = _cs.Edit(company);
+                return Ok(editCompany);
+            }
+            catch (Exception e)
+            {
+
+                return BadRequest(e.Message);
+            }
+
+
+        }
+
         [HttpDelete("{id}")]
         // [Authorize] Grab brear token later
         public ActionResult<Company> Delete(int id)

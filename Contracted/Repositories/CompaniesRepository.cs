@@ -46,5 +46,15 @@ namespace Contracted.Repositories
             string sql = "DELETE FROM companies WHERE id = @id LIMIT 1";
             _db.Execute(sql, new { id });
         }
+
+        internal void Edit(Company original)
+        {
+            string sql = @"
+            UPDATE companies
+            SET
+            name =@Name
+            WHERE id = @Id;";
+            _db.Execute(sql, original);
+        }
     }
 }

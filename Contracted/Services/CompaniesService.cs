@@ -42,5 +42,14 @@ namespace Contracted.Services
             Company foundCompany = Get(id);
             _repo.Delete(id);
         }
+
+        internal Company Edit(Company company)
+        {
+            Company original = Get(company.Id);
+            original.Name = company.Name ?? original.Name;
+
+            _repo.Edit(original);
+            return original;
+        }
     }
 }
