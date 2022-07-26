@@ -8,4 +8,12 @@ namespace Contracted.Models
         public string Name { get; set; }
 
     }
+
+    public class CompanyContractorViewModel : Companies
+    {
+
+        public int JobId { get; set; }
+
+    }
+
 }
