@@ -15,11 +15,13 @@ namespace Contracted.Controllers
 
         private readonly CompaniesService _cs;
 
-        public CompaniesController(CompaniesService cs)
+        private readonly JobsService _js;
+
+        public CompaniesController(CompaniesService cs, JobsService js)
         {
             _cs = cs;
+            _js = js;
         }
-
 
         [HttpGet]
         public ActionResult<List<Company>> Get()
@@ -55,6 +57,21 @@ namespace Contracted.Controllers
                 return BadRequest(e.Message);
             }
 
+        }
+
+        // Get all Contractors working for this company
+        [HttpGet("{id}/contractors")]
+        public ActionResult<List<Company>> GetContractors(int id)
+        {
+            try
+            {
+                List<ContractorCompanyViewModel> contractors = _js.GetByCompanyId(id);
+                return Ok(contractors);
+            }
+            catch (Exception e)
+            {
+                return BadRequest(e.Message);
+            }
         }
 
         [HttpPost]

@@ -24,6 +24,7 @@ CREATE TABLE
     IF NOT EXISTS jobs(
         id INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
         companyId INT NOT NULL,
-        contractorId INT NOT Null FOREIGN KEY(companiesId) REFERENCES companies(id) ON DELETE CASCADE,
-        FOREIGN KEY (contractorId) REFERENCES contractor(id) ON DELETE CASCADE
+        contractorId INT NOT NULL,
+        FOREIGN KEY(companyId) REFERENCES companies(id) ON DELETE CASCADE,
+        FOREIGN KEY (contractorId) REFERENCES contractors(id) ON DELETE CASCADE
     ) default charset utf8 COMMENT '';
