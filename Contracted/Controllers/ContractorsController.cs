@@ -10,30 +10,31 @@ namespace Contracted.Controllers
 
     [ApiController]
     [Route("api/[controller]")]
-    public class CompaniesController : ControllerBase
+    public class ContractorsController : ControllerBase
     {
 
-        private readonly CompaniesService _cs;
+        private readonly ContractorService _cs;
 
-        public CompaniesController(CompaniesService cs)
+        public ContractorsController(ContractorService cs)
         {
             _cs = cs;
         }
 
-
         [HttpGet]
-        public ActionResult<List<Company>> Get()
+        public ActionResult<List<Contractor>> Get()
         {
 
             try
             {
-                List<Company> companies = _cs.Get();
-                return Ok(companies);
+                List<Contractor> contractors = _cs.Get();
+                return Ok(contractors);
+
             }
             catch (Exception e)
             {
 
                 return BadRequest(e.Message);
+
             }
 
 
@@ -41,13 +42,13 @@ namespace Contracted.Controllers
 
         [HttpGet("{id}")]
 
-        public ActionResult<Company> Get(int id)
+        public ActionResult<Contractor> Get(int id)
         {
 
             try
             {
-                Company company = _cs.Get(id);
-                return Ok(company);
+                Contractor contractor = _cs.Get(id);
+                return Ok(contractor);
             }
             catch (Exception e)
             {
@@ -60,13 +61,13 @@ namespace Contracted.Controllers
         [HttpPost]
         [Authorize]
 
-        public ActionResult<Company> Create([FromBody] Company company)
+        public ActionResult<Contractor> Create([FromBody] Contractor contractor)
         {
 
             try
             {
-                Company newCompany = _cs.Create(company);
-                return Created($"/api/companies/{newCompany.Id}", newCompany);
+                Contractor newContractor = _cs.Create(contractor);
+                return Created($"/api/companies/{newContractor.Id}", newContractor);
 
             }
             catch (Exception e)
@@ -80,13 +81,13 @@ namespace Contracted.Controllers
         [HttpPut("{id}")]
         [Authorize]
 
-        public ActionResult<Company> Edit([FromBody] Company company, int id)
+        public ActionResult<Contractor> Edit([FromBody] Contractor contractor, int id)
         {
             try
             {
-                company.Id = id;
-                Company editCompany = _cs.Edit(company);
-                return Ok(editCompany);
+                contractor.Id = id;
+                Contractor editContractor = _cs.Edit(contractor);
+                return Ok(editContractor);
             }
             catch (Exception e)
             {
@@ -99,13 +100,13 @@ namespace Contracted.Controllers
 
         [HttpDelete("{id}")]
         [Authorize]
-        public ActionResult<Company> Delete(int id)
+        public ActionResult<Contractor> Delete(int id)
         {
 
             try
             {
                 _cs.Delete(id);
-                return Ok("Deleted Company");
+                return Ok("Deleted Contractor");
             }
             catch (Exception e)
             {
@@ -114,6 +115,5 @@ namespace Contracted.Controllers
             }
 
         }
-
     }
 }
